@@ -1,0 +1,16 @@
+- id: '1768744899946'
+  alias: Control boiler
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.trvs_heating
+    to:
+  conditions: []
+  actions:
+  - action: switch.turn_{{ trigger.to_state.state }}
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.sonoff_zbm5_1c_80_86
+  mode: single
