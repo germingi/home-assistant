@@ -13,14 +13,14 @@ eco_for_all_rooms:
         \ 'climate.lounge_trv_master_thermostat',\n  'climate.lounge_trv_thermostat',\n)
         %} {{ radiators\n  | reject('equalto', target_trv)\n  | list }}\n"
     data:
-      temperature: 17
+      temperature: "{{ states('input_number.eco_temp') | int }}"
       hvac_mode: heat
   - action: climate.set_temperature
     metadata: {}
     target:
       entity_id: '{{ target_trv }}'
     data:
-      temperature: 20
+      temperature: "{{ states('input_number.normal_temp') | int }}"
       hvac_mode: heat
   alias: Heat room
   description: ''
