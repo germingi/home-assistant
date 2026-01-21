@@ -4,7 +4,8 @@ eco_for_all_rooms:
       description: The thermostat to heat
       required: true
       selector:
-        entity: {}
+        entity:
+          domain: climate
   sequence:
   - action: climate.set_temperature
     metadata: {}
