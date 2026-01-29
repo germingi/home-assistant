@@ -18,8 +18,8 @@ eco_for_all_rooms:
     metadata: {}
     target:
       entity_id: "{% set radiators = (\n  'climate.sonoff_trvzb_thermostat',\n  'climate.bedroom_trv_thermostat',\n
-        \ 'climate.lounge_trv_master_thermostat',\n) %} {{ radiators\n  | reject('equalto',
-        target_trv)\n  | list }}\n"
+        \ 'climate.lounge_trv_master_thermostat',\n  'climate.sonoff_trvzb_thermostat_2',\n)
+        %} {{ radiators\n  | reject('equalto', target_trv)\n  | list }}\n"
     data:
       temperature: '{{ states(''input_number.eco_temp'') | int }}'
       hvac_mode: heat
