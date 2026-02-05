@@ -1,27 +1,47 @@
-eco_for_all_rooms:
+set_rooms_temp:
   fields:
-    target_trv:
-      description: The thermostat to heat
+    base_target_temp:
+      description: Base temperature to set all TRVs
       required: true
       selector:
         entity:
-          domain: climate
+          filter:
+            domain: input_number
+    override_target_trvs:
+      description: List of TRVs to be set to the override temperature
+      required: false
+      selector:
+        entity:
+          multiple: true
+          filter:
+            domain: climate
+    override_target_temp:
+      description: Override target temperature
+      required: false
+      selector:
+        entity:
+          filter:
+            domain: input_number
   sequence:
-  - action: climate.set_temperature
-    metadata: {}
-    target:
-      entity_id: '{{ target_trv }}'
-    data:
-      temperature: '{{ states(''input_number.normal_temp'') | int }}'
-      hvac_mode: heat
+  - if:
+    - condition: template
+      value_template: '{{ override_target_trvs | length > 0 }}'
+    then:
+    - action: climate.set_temperature
+      metadata: {}
+      target:
+        entity_id: '{{ override_target_trvs }}'
+      data:
+        temperature: '{{ states(override_target_temp) | int }}'
+        hvac_mode: heat
   - action: climate.set_temperature
     metadata: {}
     target:
       entity_id: "{% set radiators = (\n  'climate.sonoff_trvzb_thermostat',\n  'climate.bedroom_trv_thermostat',\n
         \ 'climate.lounge_trv_master_thermostat',\n  'climate.sonoff_trvzb_thermostat_2',\n)
-        %} {{ radiators\n  | reject('equalto', target_trv)\n  | list }}\n"
+        %} {{ radiators\n  | reject('in', override_target_trvs)\n  | list }}\n"
     data:
-      temperature: '{{ states(''input_number.eco_temp'') | int }}'
+      temperature: '{{ states(base_target_temp) | int }}'
       hvac_mode: heat
-  alias: Heat room
-  description: ''
+  alias: Set rooms temp
+  description: Sets a target temperature for any number of TRVs
