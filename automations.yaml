@@ -32,3 +32,16 @@
         }}'
       hvac_mode: heat
   mode: single
+- id: '1771274759486'
+  alias: Auto turn off heating
+  description: Turns off the heating at a certain time
+  triggers:
+  - trigger: time
+    at: '23:00:00'
+  conditions: []
+  actions:
+  - action: script.set_rooms_temp
+    metadata: {}
+    data:
+      base_target_temp: input_number.off_temp
+  mode: single
