@@ -1,0 +1,324 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.temp_control",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "name": "Eco",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.eco_temp"
+                    }
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.off_temp"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 1
+                  },
+                  "name": "Turn off",
+                  "show_state": false,
+                  "color": "red"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "name": "All",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.normal_temp"
+                    }
+                  }
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "name": "Office",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.eco_temp",
+                      "override_target_trvs": [
+                        "climate.sonoff_trvzb_thermostat"
+                      ],
+                      "override_target_temp": "input_number.normal_temp"
+                    }
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "name": "Bedroom",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.eco_temp",
+                      "override_target_trvs": [
+                        "climate.bedroom_trv_thermostat"
+                      ],
+                      "override_target_temp": "input_number.normal_temp"
+                    }
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.eco_temp",
+                      "override_target_trvs": [
+                        "climate.lounge_trv_master_thermostat"
+                      ],
+                      "override_target_temp": "input_number.normal_temp"
+                    }
+                  },
+                  "name": "Lounge"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "name": "Bathroom",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.set_rooms_temp",
+                    "target": {},
+                    "data": {
+                      "base_target_temp": "input_number.eco_temp",
+                      "override_target_temp": "input_number.normal_temp",
+                      "override_target_trvs": [
+                        "climate.sonoff_trvzb_thermostat_2"
+                      ]
+                    }
+                  }
+                }
+              ],
+              "column_span": 4
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "thermostat",
+                  "entity": "climate.sonoff_trvzb_thermostat",
+                  "show_current_as_primary": true,
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 4
+                  },
+                  "name": {
+                    "type": "area"
+                  }
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.bedroom_trv_thermostat",
+                  "name": {
+                    "type": "area"
+                  },
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 4
+                  },
+                  "show_current_as_primary": true
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.lounge_trv_master_thermostat",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 4
+                  },
+                  "show_current_as_primary": true
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.sonoff_trvzb_thermostat_2",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 4
+                  },
+                  "show_current_as_primary": true
+                }
+              ],
+              "column_span": 4
+            }
+          ],
+          "badges": [
+            {
+              "type": "entity",
+              "entity": "switch.sonoff_zbm5_1c_80_86"
+            }
+          ],
+          "header": {
+            "layout": "center",
+            "badges_position": "bottom",
+            "badges_wrap": "wrap"
+          }
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Diagnostics",
+          "path": "diagnostics",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "history-graph",
+                  "entities": [
+                    {
+                      "entity": "switch.sonoff_zbm5_1c_80_86",
+                      "name": "Heating"
+                    },
+                    {
+                      "entity": "sensor.sonoff_trvzb_hvac_action",
+                      "name": {
+                        "type": "area"
+                      }
+                    },
+                    {
+                      "entity": "sensor.lounge_trv_master_hvac_action",
+                      "name": "Lounge M"
+                    },
+                    {
+                      "entity": "sensor.lounge_trv_hvac_action",
+                      "name": "Lounge S"
+                    },
+                    {
+                      "entity": "sensor.sonoff_trvzb_hvac_action_2",
+                      "name": {
+                        "type": "area"
+                      }
+                    },
+                    {
+                      "entity": "sensor.bedroom_trv_hvac_action",
+                      "name": {
+                        "type": "area"
+                      }
+                    }
+                  ],
+                  "hours_to_show": 16
+                },
+                {
+                  "type": "logbook",
+                  "target": {
+                    "entity_id": [
+                      "switch.sonoff_zbm5_1c_80_86",
+                      "sensor.sonoff_trvzb_hvac_action_2",
+                      "sensor.bedroom_trv_hvac_action",
+                      "sensor.sonoff_trvzb_hvac_action",
+                      "sensor.lounge_trv_master_hvac_action",
+                      "sensor.lounge_trv_hvac_action"
+                    ]
+                  },
+                  "hours_to_show": 48
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.bedroom_trv_battery"
+                    },
+                    {
+                      "entity": "sensor.sonoff_trvzb_battery"
+                    },
+                    {
+                      "entity": "sensor.lounge_trv_master_battery"
+                    },
+                    {
+                      "entity": "sensor.lounge_trv_battery"
+                    },
+                    {
+                      "entity": "sensor.sonoff_trvzb_battery_2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Config",
+          "path": "config",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "input_number.normal_temp"
+                    },
+                    {
+                      "entity": "input_number.eco_temp",
+                      "secondary_info": "none"
+                    },
+                    {
+                      "entity": "input_number.off_temp"
+                    }
+                  ],
+                  "state_color": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

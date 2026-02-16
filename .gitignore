@@ -1,0 +1,20 @@
+# Ignore folders
+.cloud/
+.google.token/
+themes/
+blueprints/
+custom_components/
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+
+.HA_VERSION
+.ha_run.lock
+home-assistant*
+zigbee*
+
+# Include dashboard files
+.storage/*
+!.storage/lovelace*
