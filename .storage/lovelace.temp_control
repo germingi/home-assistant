@@ -250,12 +250,7 @@
                   "type": "logbook",
                   "target": {
                     "entity_id": [
-                      "switch.sonoff_zbm5_1c_80_86",
-                      "sensor.sonoff_trvzb_hvac_action_2",
-                      "sensor.bedroom_trv_hvac_action",
-                      "sensor.sonoff_trvzb_hvac_action",
-                      "sensor.lounge_trv_master_hvac_action",
-                      "sensor.lounge_trv_hvac_action"
+                      "binary_sensor.trvs_heating"
                     ]
                   },
                   "hours_to_show": 48
